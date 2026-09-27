@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SolidFitness</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">\
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SolidFitness">
+    <link rel="apple-touch-icon" href="./icons/Solidfitness.png">
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-content">
+
+        <h1>SolidFitness</h1>
+
+        <p>Your personal fitness tracker</p>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <!-- =================================
+         DASHBOARD
+    ================================== -->
+
+    <section id="dashboardSection" class="page-section">
+
+        <div class="dashboard hero-card">
+
+            <h2>Today's Workout</h2>
+
+            <p class="muted">
+                Ready when you are.
+            </p>
+
+            <button
+                id="startWorkout"
+                class="primary-button"
+            >
+                Start Workout
+            </button>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span id="workoutCount">0</span>
+
+                <p>Workouts</p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span id="exerciseCount">0</span>
+
+                <p>Exercises</p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span id="setCount">0</span>
+
+                <p>Sets</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard">
+
+            <h2>Menu</h2>
+
+            <div class="menu">
+
+                <button id="historyButton">
+                    🏋️ Workout History
+                </button>
+
+                <button id="mealButton">
+                    🍽️ Meals
+                </button>
+
+                <button id="sleepButton">
+                    😴 Sleep
+                </button>
+
+                <button id="progressButton">
+                    📈 Strength Progress
+                </button>
+
+                <button id="progressViewButton">
+                    📸 Progress View
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         CURRENT WORKOUT
+    ================================== -->
+
+    <section
+        id="workoutSection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Current Workout</h2>
+
+                <button
+                    id="cancelWorkout"
+                    class="small-button"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+
+            <label for="workoutName">
+                Workout Name
+            </label>
+
+            <input
+                type="text"
+                id="workoutName"
+                placeholder="Example: Chest & Triceps"
+            >
+
+
+            <hr>
+
+
+            <h3>Add Exercise</h3>
+
+
+            <label for="exerciseName">
+                Exercise
+            </label>
+
+            <input
+                type="text"
+                id="exerciseName"
+                placeholder="Example: Bench Press"
+            >
+
+
+            <h3 class="sets-title">
+                Add Sets
+            </h3>
+
+
+            <div class="set-inputs">
+
+                <div>
+
+                    <label for="weight">
+                        Weight (lb)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weight"
+                        placeholder="95"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="reps">
+                        Reps
+                    </label>
+
+                    <input
+                        type="number"
+                        id="reps"
+                        placeholder="10"
+                        min="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="addSet"
+                class="secondary-button"
+            >
+                + Add Set
+            </button>
+
+
+            <div id="currentSets"></div>
+
+
+            <button
+                id="addExercise"
+                class="primary-button"
+            >
+                Add Exercise
+            </button>
+
+
+            <div id="exerciseList"></div>
+
+
+            <button
+                id="finishWorkout"
+                class="success-button"
+            >
+                Finish Workout ✓
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         WORKOUT HISTORY
+    ================================== -->
+
+    <section
+        id="historySection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Workout History</h2>
+
+                <button
+                    class="small-button back-button"
+                >
+                    Back
+                </button>
+
+            </div>
+
+            <p class="muted">
+                Your completed workouts
+            </p>
+
+            <div id="historyList"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         MEALS
+    ================================== -->
+
+    <section
+        id="mealSection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Meals</h2>
+
+                <button class="small-button back-button">
+                    Back
+                </button>
+
+            </div>
+
+
+            <label for="mealName">
+                Meal
+            </label>
+
+            <input
+                type="text"
+                id="mealName"
+                placeholder="Example: Chicken & Rice"
+            >
+
+
+            <label for="mealNotes">
+                Notes
+            </label>
+
+            <textarea
+                id="mealNotes"
+                placeholder="Optional notes"
+            ></textarea>
+
+
+            <button
+                id="addMeal"
+                class="primary-button"
+            >
+                Add Meal
+            </button>
+
+
+            <div id="mealList"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         SLEEP
+    ================================== -->
+
+    <section
+        id="sleepSection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Sleep</h2>
+
+                <button class="small-button back-button">
+                    Back
+                </button>
+
+            </div>
+
+
+            <label for="sleepHours">
+                Hours Slept
+            </label>
+
+            <input
+                type="number"
+                id="sleepHours"
+                placeholder="Example: 8"
+                min="0"
+                max="24"
+                step="0.5"
+            >
+
+
+            <button
+                id="saveSleep"
+                class="primary-button"
+            >
+                Save Sleep
+            </button>
+
+
+            <div id="sleepList"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         STRENGTH PROGRESS
+    ================================== -->
+
+    <section
+        id="progressSection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Strength Progress</h2>
+
+                <button class="small-button back-button">
+                    Back
+                </button>
+
+            </div>
+
+
+            <p class="muted">
+                See how your strength changes over time.
+            </p>
+
+
+            <label for="exerciseSelector">
+                Exercise
+            </label>
+
+            <select id="exerciseSelector">
+
+                <option value="">
+                    Select an exercise
+                </option>
+
+            </select>
+
+
+            <div
+                id="progressSummary"
+                class="progress-summary"
+            >
+                Select an exercise to see your progress.
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="strengthChart"
+                ></canvas>
+
+            </div>
+
+
+            <div
+                id="progressDetails"
+                class="progress-details"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         PROGRESS VIEW
+    ================================== -->
+
+    <section
+        id="progressViewSection"
+        class="page-section"
+        style="display: none;"
+    >
+
+        <div class="dashboard">
+
+            <div class="section-header">
+
+                <h2>Progress View</h2>
+
+                <button class="small-button back-button">
+                    Back
+                </button>
+
+            </div>
+
+
+            <p class="muted">
+                Save photos or videos with dates and compare your progress.
+            </p>
+
+
+            <div class="upload-box">
+
+                <label for="progressDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="progressDate"
+                >
+
+
+                <label for="progressFile">
+                    Photo or Video
+                </label>
+
+                <input
+                    type="file"
+                    id="progressFile"
+                    accept="image/*,video/*"
+                >
+
+
+                <label for="progressNote">
+                    Note
+                </label>
+
+                <input
+                    type="text"
+                    id="progressNote"
+                    placeholder="Example: Starting point"
+                >
+
+
+                <button
+                    id="saveProgressMedia"
+                    class="primary-button"
+                >
+                    Save Progress
+                </button>
+
+            </div>
+
+
+            <h3>Your Progress</h3>
+
+            <div id="progressMediaList"></div>
+
+
+            <div class="compare-section">
+
+                <h3>Compare Progress</h3>
+
+                <p class="muted">
+                    Select two entries to compare them side-by-side.
+                </p>
+
+
+                <div class="compare-selectors">
+
+                    <div>
+
+                        <label for="compareOne">
+                            First
+                        </label>
+
+                        <select id="compareOne">
+
+                            <option value="">
+                                Select first entry
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="compareTwo">
+                            Second
+                        </label>
+
+                        <select id="compareTwo">
+
+                            <option value="">
+                                Select second entry
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="compareButton"
+                    class="secondary-button"
+                >
+                    Compare
+                </button>
+
+
+                <div
+                    id="comparison"
+                    class="comparison"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <p>SolidFitness</p>
+
+</footer>
+
+
+<script src="./apps.js"></script>
+
+</body>
+
+</html>

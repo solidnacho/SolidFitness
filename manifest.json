@@ -1,0 +1,17 @@
+{
+"name": "SolidFitness",
+"short_name": "SolidFitness",
+"description": "Personal fitness tracker",
+"start_url": "./index.html",
+"display": "standalone",
+"background_color": "#f2f2f2",
+"theme_color": "#111111",
+"orientation": "portrait",
+"icons": [
+{
+"src": "./icons/Solidfitness.png",
+"sizes": "612x612",
+"type": "image/png"
+}
+]
+}
